@@ -1,0 +1,17 @@
+h1 {
+  width: 100%;
+  height: 7%;
+  margin: 0;
+  text-align: center;
+  font-family: sans;
+  background: #aba493;
+  border: solid 1pt #949189;
+  color: #3d321a
+}
+
+#map {
+  position: absolute;
+  width: 98.5%;
+  height: 90%;
+  border: solid 1pt #949189
+}

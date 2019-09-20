@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Nominatim Typed Search</title>
+    <link rel="stylesheet" href="../contrib/leaflet.css" />
+    <link rel="stylesheet" href="../contrib/Control.Geocoder.css" />
+    <link rel="stylesheet" href="../contrib/leaflet-style.css" />
+</head>
+<body>
+    <h1>Pick-A-Peak</h1>
+    <div id="map"></div>
+
+    <script src="../contrib/leaflet.js"></script>
+    <script src="../contrib/leaflet-hash.js"></script>
+    <script src="../contrib/Control.Geocoder.js"></script>
+    <script src="../contrib/leaflet.vectorgrid.js"></script>
+    <script src="../contrib/helpers.js"></script>
+    <script>
+        var map = GeocodeHelpers.createBaseMap();
+
+        // First create a standard Nominatim geocoder with enhanced output.
+        var g = new L.Control.Geocoder.Nominatim({
+                         htmlTemplate : GeocodeHelpers.formatNominatim
+            });
+
+        // The place type needs to be added to the query, so adapt the
+        // geocode() function itself and sneak the extra query in.
+        g.orig_geocode = g.geocode;
+        g.geocode = function (query, cb, context) {
+            return this.orig_geocode(query + ' [natural=peak]', cb, context);
+        };
+
+        L.Control.geocoder({
+            collapsed : false,
+            position : "topleft",
+            showResultIcons : true,
+            geocoder : g
+        }).addTo(map);
+
+    </script>
+</body>
+</html>
+

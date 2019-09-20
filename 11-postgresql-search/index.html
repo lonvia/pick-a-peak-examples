@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Searching a local Postgresql database</title>
+    <link rel="stylesheet" href="../contrib/leaflet.css" />
+    <link rel="stylesheet" href="../contrib/Control.Geocoder.css" />
+    <link rel="stylesheet" href="../contrib/leaflet-style.css" />
+</head>
+<body>
+    <h1>Pick-A-Peak</h1>
+    <div id="map"></div>
+
+    <script src="../contrib/jquery-1.12.0.min.js"></script>
+    <script src="../contrib/leaflet.js"></script>
+    <script src="../contrib/leaflet-hash.js"></script>
+    <script src="../contrib/Control.Geocoder.js"></script>
+    <script src="../contrib/leaflet.vectorgrid.js"></script>
+    <script src="../contrib/helpers.js"></script>
+    <script src="Local.Geocoder.js"></script>
+    <script>
+        var map = GeocodeHelpers.createBaseMap();
+
+        L.Control.geocoder({
+            collapsed : false,
+            position : "topleft",
+            showResultIcons : true,
+            geocoder : new L.Control.Geocoder.LocalSearch({
+                htmlTemplate : GeocodeHelpers.formatNominatim,
+                sortResults : function (a, b) {
+                  var aele = parseInt(a.ele) || 0;
+                  var bele = parseInt(b.ele) || 0;
+                  return bele - aele;
+                }
+            })
+        }).addTo(map);
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Photon Standard Search</title>
+    <link rel="stylesheet" href="../contrib/leaflet.css" />
+    <link rel="stylesheet" href="../contrib/Control.Geocoder.css" />
+    <link rel="stylesheet" href="../contrib/leaflet-style.css" />
+</head>
+<body>
+    <h1>Pick-A-Peak</h1>
+    <div id="map"></div>
+
+    <script src="../contrib/leaflet.js"></script>
+    <script src="../contrib/leaflet-hash.js"></script>
+    <script src="../contrib/Control.Geocoder.js"></script>
+    <script src="../contrib/leaflet.vectorgrid.js"></script>
+    <script src="../contrib/helpers.js"></script>
+    <script>
+        var map = GeocodeHelpers.createBaseMap();
+
+        L.Control.geocoder({
+            collapsed : false,
+            position : "topleft",
+            showResultIcons : true,
+            // The standard Photon geocoder with slightly improved output.
+            geocoder : new L.Control.Geocoder.Photon({
+                         htmlTemplate : GeocodeHelpers.formatPhoton
+            })
+        }).addTo(map);
+
+    </script>
+</body>
+</html>
+
