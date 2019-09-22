@@ -1,6 +1,6 @@
 L.Control.Geocoder.LocalSearch = L.Class.extend({
   options: {
-    serviceUrl: 'http://localhost:8000',
+    serviceUrl: 'http://localhost:8001',
     geocoderUrl: 'https://nominatim.openstreetmap.org',
     geocodingQueryParams: {},
     reverseQueryParams: {},
